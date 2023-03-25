@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "recurr_payments/bin/Release/net7.0/publish",
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/af376ba5-fa69-41d9-80ad-8bef2f0e8c6f/resourceGroups/appsvc_windows_centralus_basic/providers/Microsoft.Web/sites/recurrency-payments"
+}
