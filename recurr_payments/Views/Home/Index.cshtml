@@ -1,9 +1,72 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Recurrency Payments";
 }
 
+@* <head>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
+</head> *@
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Jack, learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @* <div class="row">
+        <div class="col-md-6">
+            <img id="img_logo" alt="Recurrency Logo" src="images/recurrency_thumb.jpg" width="50" height="50" style="opacity: 0.9; margin-right: 10px;"/>
+        </div>
+        <div class="col-md-6">
+            <h2 class="display-4" style="margin-bottom: 20;">Recurrency Payments</h2>
+        </div>
+    </div> *@
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <h2>Our gateway allows you to accept payments safely and easily!</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><p>Click the button below to copy the url and paste it to a Chrome browser</p></div>
+        <div class="col-md-12" style="align-content: right">
+            <span id="text-to-copy" style="margin-right: 20px;">http://app.recurrency.com/payments/@Context.Request.QueryString</span>
+            <button onclick="copy()">Copy URL</button>
+        </div>
+   </div>
+</div>
+<div>
+    <a href="https://google.com" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=400'); return false;">Popup link</a>
 </div>
 
+<script>
+function copy(){
+    var inp = document.createElement('input');
+    document.body.appendChild(inp)
+    inp.value = document.getElementById("text-to-copy").textContent
+    inp.select();
+    document.execCommand('copy',false);
+    alert("Copied the text: " + inp.value);
+    inp.remove();
+}
+
+const span = document.querySelector("span");
+
+span.onclick = function() {
+document.execCommand("copy");
+}
+
+span.addEventListener("copy", function(event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", span.textContent);
+        console.log(event.clipboardData.getData("text"))
+    }
+});
+
+function myFunction() {
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+</script>
