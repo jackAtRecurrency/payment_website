@@ -1,7 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Recurrency Payments";
 }
+@* <script>
+    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.focus();
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
+</script> *@
 @* <head>
     <style>
       body {
@@ -25,45 +41,65 @@
     </div> *@
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-12">
-            <h2>Our gateway allows you to accept payments safely and easily!</h2>
+            <img id="img_logo" alt="Recurrency Logo" src="@Url.Content("~/images/recurrency_thumb.jpg")" width="50" height="50" style="opacity: 0.9; margin-right: 10px;"/>
+            <h2>Recurrency allows you to accept payments safely and easily!</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12"><p>Click the button below to copy the url and paste it to a Chrome browser</p></div>
         <div class="col-md-12" style="align-content: right">
             <span id="text-to-copy" style="margin-right: 20px;">http://app.recurrency.com/payments/@Context.Request.QueryString</span>
+            <button onclick="copyToClipboard(document.getElementById('text-to-copy').textContent)">COPY URL</button>
+
+            @* <span id="text-to-copy" style="margin-right: 20px;">http://app.recurrency.com/payments/@Context.Request.QueryString</span>
             <button onclick="copy()">Copy URL</button>
+            <button onclick="copy2()">Copy URL2</button>
+            <a href="#" onclick="copy2()">Copy URL2</a> *@
+            @* <p>
+        <button class="js-textareacopybtn" style="vertical-align:top;">Copy Textarea</button>
+        <textarea class="js-copytextarea">Hello I'm some text</textarea>
+            </p> *@
         </div>
    </div>
 </div>
-<div>
-    <a href="https://google.com" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=400'); return false;">Popup link</a>
-</div>
-
+@* <div>
+    <a href="https://google.com" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=400'); return false;">Popup link1</a>
+    <a href="https://recurrency-payments.azurewebsites.net/" onclick="window.open(this.href,'targetWindow','toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=700,height=400'); return false;">Popup link2</a>
+    <a href="https://google.com">Google Nonpop</a>
+    <a href="https://recurrency-payments.azurewebsites.net/">Recurrency Nonpop</a>
+</div> *@
+<noscript>
+    <style type="text/css">
+        .pagecontainer {display:none;}
+    </style>
+    <div class="noscriptmsg">
+    You don't have javascript enabled.  Good luck with that.
+    </div>
+</noscript>
 <script>
 function copy(){
-    var inp = document.createElement('input');
-    document.body.appendChild(inp)
-    inp.value = document.getElementById("text-to-copy").textContent
-    inp.select();
+    //alert("JS enabled");
+    var inputObj = document.createElement('input');
+    document.body.appendChild(inputObj)
+    inputObj.value = document.getElementById("text-to-copy").textContent
+    inputObj.focus();
+    inputObj.select();
     document.execCommand('copy',false);
-    alert("Copied the text: " + inp.value);
-    inp.remove();
+    //alert("Copied the text: " + inputObj.value);
+    inputObj.remove();
 }
 
-const span = document.querySelector("span");
-
-span.onclick = function() {
-document.execCommand("copy");
+function copy2(){
+   alert("JS enabled");
+   window.clipboardData.setData('Text', 'aaaaaaaJACKJACK');
 }
 
-span.addEventListener("copy", function(event) {
-    event.preventDefault();
-    if (event.clipboardData) {
-        event.clipboardData.setData("text/plain", span.textContent);
-        console.log(event.clipboardData.getData("text"))
-    }
-});
+
+function copyToClipboard(text) {
+    window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+
 
 function myFunction() {
   // Alert the copied text
