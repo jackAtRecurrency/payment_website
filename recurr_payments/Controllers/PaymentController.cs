@@ -47,13 +47,16 @@ public class PaymentController : ControllerBase
 
         if (recurrency != "awesome") return BadRequest("Invalid Request");
 
-
         // construct the URL with query string
-        var baseUrl = $"https://41eb-2408-8207-25e8-8570-fd9e-7270-e71d-7309.jp.ngrok.io/cwc-play/payments/order/1049298";
+        var baseUrl = $"https://05c5-99-55-160-105.ngrok-free.app/cwc-play/payments/order/1049298";
         var urlWithQueryString = $"{baseUrl}?{queryString}";
+        int x = 50;
+        int y = 20;
+        int width = 750;
+        int height = 850;
 
-        var openBrowserCommand = "--app=data:text/html,<html><body><script>window.moveTo(200,200);window.resizeTo(900,1000);window.location='" + urlWithQueryString + "';</script></body></html>";
-        return Ok(openBrowserCommand);
+        string arguments = $"--app=\"{urlWithQueryString}\" --window-position={x},{y} --window-size={width},{height} --disable-extensions --disable-plugins-discovery --disable-popup-blocking --hide-scrollbars";
+        return Ok(arguments);
 
         // string paymentLink = $"https://d484-2408-8207-25e8-8570-70d9-db52-dac3-4cca.jp.ngrok.io/cwc-play/payments/order/{orderId}?customerId={customerId}&companyId={companyId}&totalAmt={totalAmount}&taxAmt={taxAmount}";
         // return Ok(responseString.ToString());
