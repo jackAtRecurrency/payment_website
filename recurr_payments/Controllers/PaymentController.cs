@@ -22,13 +22,13 @@ public class PaymentController : ControllerBase
     {
         // build the query string
         var queryString = new System.Text.StringBuilder();
-        var orderId = "";
+        var orderNo = "";
         var recurrency = "";
         foreach (var kvp in queryStringParams)
         {
-            if(kvp.Key == "orderId")
+            if(kvp.Key == "order_no")
             {
-                orderId = kvp.Value;
+                orderNo = kvp.Value;
             }
 
             if(kvp.Key == "recurrency")
@@ -48,7 +48,7 @@ public class PaymentController : ControllerBase
         if (recurrency != "awesome") return BadRequest("Invalid Request");
 
         // construct the URL with query string
-        var baseUrl = $"https://05c5-99-55-160-105.ngrok-free.app/cwc-play/payments/order/1049298";
+        var baseUrl = $"https://05c5-99-55-160-105.ngrok-free.app/cwc-play/payments/order/{orderNo}";
         var urlWithQueryString = $"{baseUrl}?{queryString}";
         int x = 50;
         int y = 20;
